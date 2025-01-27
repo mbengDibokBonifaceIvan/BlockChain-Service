@@ -13,7 +13,7 @@ public class CommercialOperationsController {
     @Autowired
     private CommercialOperationsService service;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> createOperation(
             @RequestParam BigInteger id,
             @RequestParam String type,

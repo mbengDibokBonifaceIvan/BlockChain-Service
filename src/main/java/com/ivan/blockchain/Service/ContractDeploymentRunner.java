@@ -16,6 +16,7 @@ public class ContractDeploymentRunner implements CommandLineRunner {
         contractService.deployContract();
         System.out.println("Contract deployed successfully! Contract address: " + ContractService.getContractAddress());
         System.out.println("Com Ops Contract deployed successfully! Contract address: " + ContractService.getComOpsAddress());
+        System.out.println("Resource Management Contract deployed successfully! Contract address: " + ContractService.getResourceAddress());
 
     }
 }
