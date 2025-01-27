@@ -7,6 +7,10 @@ public class CommercialOperationDTO {
     private String operationType;
     private String status;
     private String seller;
+    private String buyer;
+    private BigInteger blockNumber;
+    private BigInteger blockTimestamp;
+
 
     public CommercialOperationDTO() {
     }
@@ -77,7 +81,4 @@ public class CommercialOperationDTO {
         this.blockTimestamp = blockTimestamp;
     }
 
-    private String buyer;
-    private BigInteger blockNumber;
-    private BigInteger blockTimestamp;
 }
