@@ -2,6 +2,7 @@ package com.ivan.blockchain.Controller;
 
 import com.ivan.blockchain.Service.CommercialOperationsService;
 import com.ivan.blockchain.SmartContracts.CommercialOperations;
+import com.ivan.blockchain.util.CommercialOperationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,27 +16,23 @@ public class CommercialOperationsController {
 
     @PostMapping("/create")
     public ResponseEntity<Void> createOperation(
-            @RequestParam BigInteger id,
-            @RequestParam String type,
-            @RequestParam String status,
-            @RequestParam String seller,
-            @RequestParam String buyer
-    ) {
-        service.createOperation(id, type, status, seller, buyer);
+            @RequestBody CommercialOperationDTO commercialOperationDTO
+    ) throws Exception {
+        service.createOperation(commercialOperationDTO);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CommercialOperations.Operation> getOperation(@PathVariable BigInteger id) {
+    public ResponseEntity<CommercialOperationDTO> getOperation(@PathVariable BigInteger id) throws Exception {
         return ResponseEntity.ok(service.getOperation(id));
     }
-
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Void> updateStatus(
-            @PathVariable BigInteger id,
-            @RequestParam String newStatus
-    ) {
-        service.updateOperationStatus(id, newStatus);
-        return ResponseEntity.ok().build();
-    }
+//
+//    @PutMapping("/{id}/status")
+//    public ResponseEntity<Void> updateStatus(
+//            @PathVariable BigInteger id,
+//            @RequestParam String newStatus
+//    ) {
+//        service.updateOperationStatus(id, newStatus);
+//        return ResponseEntity.ok().build();
+//    }
 }

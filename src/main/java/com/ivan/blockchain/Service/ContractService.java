@@ -48,5 +48,4 @@ public class ContractService {
         return contractAddress;
     }
 
-
 }

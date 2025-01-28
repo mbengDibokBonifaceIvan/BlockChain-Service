@@ -1,55 +1,75 @@
 package com.ivan.blockchain.Service;
-
 import com.ivan.blockchain.SmartContracts.CommercialOperations;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import com.ivan.blockchain.util.CommercialOperationDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
-import org.web3j.tx.gas.ContractGasProvider;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.tuples.generated.Tuple2;
+import org.web3j.tx.TransactionManager;
+import org.web3j.tx.gas.DefaultGasProvider;
+
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
-@Slf4j
 public class CommercialOperationsService {
-    private final CommercialOperations contract;
 
-    public CommercialOperationsService(
-            Web3j web3j,
-            @Value("${ethereum.contract.address}") String contractAddress,
-            @Value("${ethereum.account.private-key}") String privateKey,
-            ContractGasProvider gasProvider
-    ) {
-        Credentials credentials = Credentials.create(privateKey);
-        this.contract = CommercialOperations.load(contractAddress, web3j, credentials, gasProvider);
+    private final Web3j web3j;
+    private final TransactionManager transactionManager;
+
+   // private CommercialOperations contract;
+    @Autowired
+    public CommercialOperationsService(Web3j web3j, TransactionManager transactionManager) {
+        this.web3j = web3j;
+        this.transactionManager = transactionManager;
+      //  this.contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
     }
 
-    public void createOperation(BigInteger id, String type, String status, String seller, String buyer) {
-        try {
-            contract.createOperation(id, type, status, seller, buyer).send();
-            //log.info("Operation created with ID: {}", id);
-        } catch (Exception e) {
-            //log.error("Error creating operation: ", e);
-            throw new RuntimeException("Failed to create operation", e);
-        }
+    public CommercialOperationDTO createOperation(CommercialOperationDTO dto) throws Exception {
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+        TransactionReceipt receipt = contract.send_createOperation(
+                dto.getId(),
+                dto.getOperationType(),
+                dto.getStatus(),
+                dto.getSeller(),
+                dto.getBuyer()
+        ).send();
+
+        return dto;
     }
 
-    public CommercialOperations.Operation getOperation(BigInteger id) {
-        try {
-            return contract.getOperation(id).send();
-        } catch (Exception e) {
-            //log.error("Error getting operation: ", e);
-            throw new RuntimeException("Failed to get operation", e);
-        }
+    public CommercialOperationDTO getOperation(BigInteger id) throws Exception {
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+
+        CommercialOperations.Operation contractOperation = contract.call_getOperation(id).send();
+
+        return new CommercialOperationDTO(
+                contractOperation.id,
+                contractOperation.operationType,
+                contractOperation.status,
+                contractOperation.seller,
+                contractOperation.buyer,
+                contractOperation.blockNumber,
+                contractOperation.blockTimestamp
+        );
     }
 
-    public void updateOperationStatus(BigInteger id, String newStatus) {
-        try {
-            contract.updateOperationStatus(id, newStatus).send();
-           // log.info("Operation status updated for ID: {}", id);
-        } catch (Exception e) {
-           // log.error("Error updating operation status: ", e);
-            throw new RuntimeException("Failed to update operation status", e);
-        }
+    public List<BigInteger> getAllOperationIds() throws Exception {
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+
+        return contract.call_getAllOperationIds().send();
+    }
+
+    public void updateOperationStatus(BigInteger id, String newStatus) throws Exception {
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+
+        contract.send_updateOperationStatus(id, newStatus).send();
+    }
+
+    public Tuple2<BigInteger, BigInteger> getOperationBlockInfo(BigInteger id) throws Exception {
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+
+        return contract.call_getOperationBlockInfo(id).send();
     }
 }
