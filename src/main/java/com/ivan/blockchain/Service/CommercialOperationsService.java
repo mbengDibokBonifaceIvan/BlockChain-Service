@@ -27,7 +27,10 @@ public class CommercialOperationsService {
     }
 
     public CommercialOperationDTO createOperation(CommercialOperationDTO dto) throws Exception {
-        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j, transactionManager, new DefaultGasProvider());
+       
+        CommercialOperations contract = CommercialOperations.load(ContractService.getComOpsAddress(), web3j,
+                transactionManager, new DefaultGasProvider());
+       
         TransactionReceipt receipt = contract.send_createOperation(
                 dto.getId(),
                 dto.getOperationType(),

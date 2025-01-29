@@ -12,10 +12,10 @@ import org.web3j.tx.TransactionManager;
 public class Web3jConfig {
 
 
-    private String networkUrl = "http://127.0.0.1:63595";
+    private String networkUrl = "http://127.0.0.1:61759";
 
-
-    private String privateKey = "a492823c3e193d6c595f37a18e3c06650cf4c74558cc818b16130b293716106f";
+    private String privateKey = "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"; // Add your private key here
+    //private String privateKey = "a492823c3e193d6c595f37a18e3c06650cf4c74558cc818b16130b293716106f";
 
     @Bean
     public Web3j web3j() {

@@ -2,7 +2,7 @@ package com.ivan.blockchain.Service;
 
 
 import com.ivan.blockchain.SmartContracts.CommercialOperations;
-import com.ivan.blockchain.SmartContracts.ResourceManagement;
+import com.ivan.blockchain.SmartContracts.Resource;
 import com.ivan.blockchain.SmartContracts.ShipIt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class ContractService {
         contractAddress = contract.getContractAddress();
         CommercialOperations ComOpsContract = CommercialOperations.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
         ComOpsAddress = ComOpsContract.getContractAddress();
-        ResourceManagement resourceManagement = ResourceManagement.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
+        Resource resourceManagement = Resource.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
         resourceAddress = resourceManagement.getContractAddress();
 
 
