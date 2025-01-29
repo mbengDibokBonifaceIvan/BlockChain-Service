@@ -4,6 +4,8 @@ package com.ivan.blockchain.Service;
 import com.ivan.blockchain.SmartContracts.CommercialOperations;
 import com.ivan.blockchain.SmartContracts.Resource;
 import com.ivan.blockchain.SmartContracts.ShipIt;
+import com.ivan.blockchain.SmartContracts.Travel_Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.Web3j;
@@ -18,6 +20,12 @@ public class ContractService {
     private static String contractAddress;
     private static String ComOpsAddress;
     private static String resourceAddress;
+    private static String travelAdress;
+
+
+    public static String getTravelAdress() {
+        return travelAdress;
+    }
 
     public static String getResourceAddress() {
         return resourceAddress;
@@ -41,6 +49,8 @@ public class ContractService {
         Resource resourceManagement = Resource.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
         resourceAddress = resourceManagement.getContractAddress();
 
+        Travel_Resource travel_Resource = Travel_Resource.deploy(web3j, transactionManager, new DefaultGasProvider()).send();
+        travelAdress = travel_Resource.getContractAddress();
 
     }
 
