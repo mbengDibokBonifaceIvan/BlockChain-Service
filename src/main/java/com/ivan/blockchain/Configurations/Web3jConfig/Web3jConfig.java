@@ -1,5 +1,4 @@
-package com.ivan.blockchain.Web3jConfig;
-import org.springframework.beans.factory.annotation.Value;
+package com.ivan.blockchain.Configurations.Web3jConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.web3j.protocol.Web3j;
