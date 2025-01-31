@@ -19,7 +19,7 @@ Service blockchain développé dans le cadre du projet d'Ingénierie de Trafic R
 ### Composants Principaux
 - Smart Contract de traitement des opérations commerciales
 - Smart Contract de traitement des ressources
-- Interface web de gestion
+- Backend Spring Boot
 - Machine Virtuelle Ethereum
 
 ## 🚀 Installation
@@ -100,7 +100,7 @@ Ce projet est sous licence [Apache 2.0](http://springdoc.org)
 - École Nationale Supérieure Polytechnique de Yaoundé
 
 ## 📞 Contact
-- Email : mbengivan63@gmail.com
+- Email : mbengivan63@gmail.com  sambo@gmail.com
 - Issue Tracker : https://github.com/votre-organisation/BlockChain-Service/issues
 
 ## 🔄 État du Projet
