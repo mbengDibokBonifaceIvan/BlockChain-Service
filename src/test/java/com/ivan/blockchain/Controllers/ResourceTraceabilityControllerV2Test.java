@@ -1,11 +1,11 @@
-package com.GI2025.blockchain.Controllers;
+package com.ivan.blockchain.Controllers;
 
-// Tests pour ResourceTraceabilityControllerV2
-import com.GI2025.blockchain.contracts.javaWrapper.ResourceTraceability;
-import com.GI2025.blockchain.controller.ResourceTraceabilityControllerV2;
-import com.GI2025.blockchain.service.ResourceTraceabilityServiceV2;
-import com.GI2025.blockchain.util.ResourceStateRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ivan.blockchain.contracts.javaWrapper.ResourceTraceability;
+import com.ivan.blockchain.controller.ResourceTraceabilityControllerV2;
+import com.ivan.blockchain.service.ResourceTraceabilityServiceV2;
+import com.ivan.blockchain.util.ResourceStateRequest;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

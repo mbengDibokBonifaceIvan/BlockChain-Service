@@ -1,4 +1,4 @@
-package com.GI2025.blockchain.Configurations.Swagger_Config;
+package com.ivan.blockchain.Configurations.Swagger_Config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

@@ -1,10 +1,11 @@
-package com.GI2025.blockchain.service;
+package com.ivan.blockchain.service;
 
-import com.GI2025.blockchain.contracts.javaWrapper.CommercialOperations;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.Web3j;
 import org.web3j.tx.TransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
+
+import com.ivan.blockchain.contracts.javaWrapper.CommercialOperations;
 
 import java.math.BigInteger;
 import java.util.List;

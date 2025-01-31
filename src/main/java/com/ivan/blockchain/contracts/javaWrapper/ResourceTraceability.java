@@ -1,4 +1,4 @@
-package com.GI2025.blockchain.contracts.javaWrapper;
+package com.ivan.blockchain.contracts.javaWrapper;
 
 import io.reactivex.Flowable;
 import java.math.BigInteger;

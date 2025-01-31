@@ -1,4 +1,4 @@
-package com.GI2025.blockchain;
+package com.ivan.blockchain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

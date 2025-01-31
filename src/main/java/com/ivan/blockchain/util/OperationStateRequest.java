@@ -1,4 +1,4 @@
-package com.GI2025.blockchain.util;
+package com.ivan.blockchain.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

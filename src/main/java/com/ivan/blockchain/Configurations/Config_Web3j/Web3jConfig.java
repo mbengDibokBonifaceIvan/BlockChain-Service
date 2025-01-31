@@ -1,4 +1,4 @@
-package com.GI2025.blockchain.Configurations.Config_Web3j;
+package com.ivan.blockchain.Configurations.Config_Web3j;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
