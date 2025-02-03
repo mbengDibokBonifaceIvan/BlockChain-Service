@@ -1,109 +1,159 @@
-# Service Blockchain de Traçabilité 🔗
-![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-green.svg)
-![Java](https://img.shields.io/badge/Java-17-orange.svg)
+# Service de Traçabilité Blockchain 🔗
 
-## 📋 Description
-Service blockchain développé dans le cadre du projet d'Ingénierie de Trafic Réseau (5GI 2024-2025). Ce service assure la traçabilité des opérations commerciales et des ressources via la technologie blockchain Ethereum.
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/mbengDibokBonifaceIvan/BlockChain-Service)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-green.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![Test Coverage](https://img.shields.io/badge/coverage-87%25-green.svg)
 
-## 🏗 Architecture
+## 📋 Description du Projet
 
-### Technologies Utilisées
-- **Backend**: Spring Boot 3.4.2
-- **Blockchain**: Ethereum (Go-Ethereum)
-- **Conteneurisation**: Docker
-- **Orchestration**: Kurtosis 2.1.0
-- **Documentation API**: OpenAPI (Swagger)
-- **Tests**: JUnit, Mockito
+### Contexte
+Service blockchain innovant développé dans le cadre du projet d'Ingénierie de Trafic Réseau (5GI 2024-2025), offrant une solution de traçabilité transparente et sécurisée pour les opérations commerciales et les ressources.
 
-### Composants Principaux
-- Smart Contract de traitement des opérations commerciales
-- Smart Contract de traitement des ressources
-- Backend Spring Boot
-- Machine Virtuelle Ethereum
+### Objectifs Principaux
+- 🔐 Assurer la transparence des transactions
+- 🔗 Traçabilité complète des opérations commerciales
+- 📊 Gestion traçable des ressources
+- 🌐 Utilisation de la technologie Ethereum
 
-## 🚀 Installation
+## 🏗️ Architecture Technique
 
-### Prérequis
-```bash
-- Java JDK 17 ou supérieur
-- Maven 3.8+
-- Docker et Kurtosis
-- Truffle et Web3j (pour les smart contracts)
+### Stack Technologique
+| Domaine            | Technologies           |
+| ------------------ | ---------------------- |
+| Backend            | Spring Boot 3.4.2      |
+| Blockchain         | Ethereum (Go-Ethereum) |
+| Conteneurisation   | Docker                 |
+| Orchestration      | Kurtosis 2.1.0         |
+| Documentation API  | OpenAPI (Swagger)      |
+| Framework de Tests | JUnit, Mockito         |
+
+### Configuration Réseau Ethereum Détaillée
+
+#### Fichier `network_params.yaml`
+```yaml
+participants:
+  # Configuration des nœuds Ethereum
+  - el_type: geth      # Nœud de couche d'exécution Geth
+    cl_type: lighthouse  # Client de couche de consensus Lighthouse
+    count: 2            # Nombre de nœuds avec cette configuration
+
+  - el_type: geth      # Autre configuration de nœud
+    cl_type: teku      # Client de couche de consensus Teku
+
+# Paramètres réseau spécifiques
+network_params:
+  network_id: "585858"  # Identifiant unique du réseau privé
+
+# Services additionnels
+additional_services:
+  - dora  # Service supplémentaire (explorateur de blocs)
 ```
 
-### Configuration
-1. Cloner le dépôt :
-```bash
-git clone https://github.com/mbengDibokBonifaceIvan/BlockChain-Service.git
-cd BlockChain-Service
-```
+#### Explication de la Configuration
+- **Participants**: Définit la topologie du réseau Ethereum
+  - Deux types de nœuds avec des clients de consensus différents
+  - Geth comme client d'exécution
+  - Lighthouse et Teku comme clients de consensus
+- **Network ID**: Réseau privé unique (585858)
+- **Services Additionnels**: Inclusion de Dora, un explorateur de blocs
 
-2. Installer les dépendances :
-```bash
-mvn clean install
-```
+## 🚀 Guide d'Installation Détaillé
 
-3. Lancer les conteneurs :
-```bash
-docker-compose up -d
-```
+### Prérequis Techniques
+- ☕ Java Development Kit (JDK) 17+
+- 🏗️ Maven 3.8+
+- 🐳 Docker
+- 🌐 Kurtosis
+- 🧩 Truffle
+- 🔗 Web3j
 
-## 📚 Documentation API
+### Étapes d'Installation
 
-La documentation de l'API est disponible via Swagger UI :
-- Local : http://localhost:8080/swagger-ui.html
-- Production : https://votre-domaine/swagger-ui.html
+1. **Clonage du Dépôt**
+   ```bash
+   git clone https://github.com/mbengDibokBonifaceIvan/BlockChain-Service.git
+   cd BlockChain-Service
+   ```
 
-## 🔍 Tests
+2. **Installation des Dépendances**
+   ```bash
+   mvn clean install
+   ```
 
-### Exécuter les tests
+3. **Configuration du Réseau Ethereum Privé**
+   ```bash
+   # Lancement du réseau avec la configuration personnalisée
+    kurtosis run github.com/ethpandaops/ethereum-package --args-file ./network_params.yaml --image-download always --enclave Ethereum-Network
+   ```
+
+4. **Démarrage de l'Application**
+   ```bash
+   mvn spring-boot:run
+   ```
+
+## 🔍 Points d'Accès API
+
+### Opérations Commerciales
+- `POST /api/v2/operations` : Création d'une nouvelle opération
+- `GET /api/v2/operations/states/{id}` : Historique détaillé d'une opération
+
+### Gestion des Ressources
+- `POST /api/v2/resource` : Enregistrement d'une ressource
+- `GET /api/v2/resource/states/{id}` : Historique complet d'une ressource
+
+## 📊 Tests et Qualité
+
+### Stratégie de Tests
 ```bash
 # Tests unitaires
 mvn test
 
 # Tests d'intégration
 mvn verify
-```
 
-### Couverture de code
-```bash
+# Rapport de couverture de code
 mvn test jacoco:report
 ```
-Le rapport de couverture sera généré dans `target/site/jacoco/index.html`
 
-## 🛠 Utilisation
-
-### Endpoints principaux
-
-#### Opérations Commerciales
-- `POST /api/v2/operations` : Ajouter une opération
-- `GET /api/v2/operations/states/{id}` : Obtenir l'historique d'une opération
-
-#### Ressources
-- `POST /api/v2/resource` : Ajouter une ressource
-- `GET /api/v2/resource/states/{id}` : Obtenir l'historique d'une ressource
+### Couverture de Code
+- Rapport généré : `target/site/jacoco/index.html`
+- Couverture actuelle : 87%
 
 ## 🤝 Contribution
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+
+### Processus
+1. Forker le projet
+2. Créer une branche de fonctionnalité
+3. Commiter les modifications
+4. Soumettre une Pull Request
+
+### Recommandations
+- Respecter les conventions de codage
+- Documenter les changements
+- Fournir des tests unitaires
 
 ## 📝 Licence
-Ce projet est sous licence [Apache 2.0](http://springdoc.org)
+Distribué sous licence Apache 2.0. Voir `LICENSE` pour plus de détails.
 
-## 👥 Équipe
-- Développé par l'équipe Blockchain-Service
-- Promotion 5GI 2024-2025
-- École Nationale Supérieure Polytechnique de Yaoundé
+## 👥 Équipe de Développement
+- **Organisation** : Équipe Blockchain-Service
+- **Promotion** : 5GI 2024-2025
+- **Institution** : École Nationale Supérieure Polytechnique de Yaoundé
 
-## 📞 Contact
-- Email : mbengivan63@gmail.com  sambo@gmail.com
-- Issue Tracker : https://github.com/votre-organisation/BlockChain-Service/issues
+## 📞 Contacts
 
-## 🔄 État du Projet
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![Test Coverage](https://img.shields.io/badge/coverage-87%25-green.svg)
-![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
+### Développeurs
+-  Mbeng Dibok Boniface Ivan: `mbengivan63@gmail.com`
+- Sambo Mohammadou Bachirou  : `sambo.m.bachirou@gmail.com`
+
+### Support
+- Tracker des Issues : [Lien GitHub Issues](https://github.com/mbengDibokBonifaceIvan/BlockChain-Service/issues)
+
+---
+
+**🔍 État Actuel du Projet**
+- ✅ Stabilité : Stable
+- 📊 Couverture des Tests : 87%
+- 🔄 Dépendances : À jour
