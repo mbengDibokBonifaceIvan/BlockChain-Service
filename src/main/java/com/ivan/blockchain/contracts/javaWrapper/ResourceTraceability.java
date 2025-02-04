@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
+//import lombok.Data;
 import org.web3j.abi.EventEncoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.DynamicArray;
@@ -233,6 +234,7 @@ public class ResourceTraceability extends Contract {
         return _addresses.get(networkId);
     }
 
+    //@Data
     public static class ResourceState extends DynamicStruct {
         public BigInteger identification;
 
