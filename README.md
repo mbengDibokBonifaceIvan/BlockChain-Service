@@ -119,7 +119,7 @@ mvn test jacoco:report
 
 ### Couverture de Code
 - Rapport généré : `target/site/jacoco/index.html`
-- Couverture actuelle : 87%
+- Couverture actuelle : 11%
 
 ## 🤝 Contribution
 
