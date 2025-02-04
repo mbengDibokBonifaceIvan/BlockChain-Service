@@ -155,5 +155,5 @@ Distribué sous licence Apache 2.0. Voir `LICENSE` pour plus de détails.
 
 **🔍 État Actuel du Projet**
 - ✅ Stabilité : Stable
-- 📊 Couverture des Tests : 87%
+- 📊 Couverture des Tests : 11%
 - 🔄 Dépendances : À jour
